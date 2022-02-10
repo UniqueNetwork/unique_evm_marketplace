@@ -1,0 +1,8 @@
+.DS_Store
+.env
+
+# Front and back
+/unique-marketplace
+/unique-marketplace-api
+
+docker-compose.yml

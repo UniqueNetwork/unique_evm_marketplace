@@ -1,0 +1,100 @@
+version: "3.5"
+
+x-marketplace: &marketplace-backend
+  build:
+    context: ./unique-marketplace-api
+    dockerfile: Dockerfile
+  image: marketplace-backend
+  restart: unless-stopped
+  environment:
+    POSTGRES_URL: 'postgres://marketplace:12345@marketplace-postgres:5432/marketplace_db'
+    API_PORT: '5000'
+    DISABLE_SECURITY: 'true'
+    # ESCROW_SEED: '//Alice'
+    # ESCROW_ADDRESS: '5EC3pKTxGj8ciFp37giawUY1B4aWTAU7aRRK8eA1J8SKNRsf'
+    UNIQUE_WS_ENDPOINT: 'wss://opal.unique.network'
+    UNIQUE_NETWORK: 'opal'
+    UNIQUE_START_FROM_BLOCK: 'current'
+    # CONTRACT_ETH_OWNER_SEED: 'Get by running "npm run playground deploy_contract"'
+    # CONTRACT_ADDRESS: 'Get by running "npm run playground deploy_contract"'
+    # UNIQUE_COLLECTION_IDS: '1, 2, 3'
+    KUSAMA_WS_ENDPOINT: 'wss://kusama-rpc.polkadot.io'
+    KUSAMA_NETWORK: 'kusama'
+    KUSAMA_START_FROM_BLOCK: 'current'
+    COMMISSION_PERCENT: '10'
+    COMMISSION: '10'
+    AUTO_DB_MIGRATIONS: 'false'
+    SENTRY_ENABLED: 'false'
+    SENTRY_ENV: 'production'
+    SENTRY_DSN: 'https://hash@domain.tld/sentryId'
+  depends_on:
+    - marketplace-postgres
+
+services:
+  marketplace-postgres:
+    image: postgres:14.1-alpine
+    container_name: marketplace-postgres
+    environment:
+      POSTGRES_DB: 'marketplace_db'
+      POSTGRES_USER: 'marketplace'
+      POSTGRES_PASSWORD: '12345'
+      POSTGRES_PORT: '5432'
+      POSTGRES_INITDB_ARGS: "--auth-local=trust"
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    volumes:
+      - ../postgresql/marketplace:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+
+  marketplace-api:
+    container_name: marketplace-api
+    ports:
+      - 5000:5000
+    <<: *marketplace-backend
+
+  marketplace-escrow-unique:
+    container_name: marketplace-escrow-unique
+    command: [ "npm", "run", "escrow:unique" ]
+    <<: *marketplace-backend
+
+  marketplace-escrow-kusama:
+    container_name: marketplace-escrow-kusama
+    command: [ "npm", "run", "escrow:kusama" ]
+    <<: *marketplace-backend
+
+  frontend:
+    image: apps
+    container_name: frontend
+    expose:
+      - 3003
+    ports:
+      - 3000:3003
+    environment:
+      DECIMALS: '6'
+      FAVICON_PATH: 'favicons/marketplace'
+      GRAPH_QL_ADMIN_SECRET: 'hepM3wfsATBoI-ix2uhsAodr1j99MThPF5LBZJI2YtHAax7W9BIP9F8IWuzcNUC4'
+      GRAPH_QL_API: 'https://dev-api-explorer.unique.network/v1/graphql'
+      IMAGE_SERVER_URL: 'https://dev-offchain-api.unique.network'
+      IPFS_GATEWAY: 'https://dev-ipfs.unique.network/ipfs'
+      KUSAMA_API: 'wss://kusama-rpc.polkadot.io'
+      KUSAMA_BACKUP_API: 'wss://polkadot.api.onfinality.io/public-ws'
+      KUSAMA_DECIMALS: '12'
+      MAX_GAS: '1000000000000'
+      MIN_PRICE: '0.000001'
+      MIN_TED_COLLECTION: '1'
+      QUOTE_ID: '2'
+      UNIQUE_API: 'http://host.docker.internal:5000'
+      UNIQUE_BLOCK_EXPLORER: 'https://scan-quartz.unique.network/'
+      UNIQUE_SUBSTRATE_API: 'wss://opal.unique.network/'
+      UNIQUE_SUBSTRATE_API_RPC: 'https://rpc-opal.unique.network'
+      VALUE: '1'
+      WHITE_LABEL_URL: 'https://whitelabel.unique.network'
+      UNIQUE_SERVE_PORT: '3003'
+    build:
+      context: ./unique-marketplace
+      dockerfile: Dockerfile.ui.local
+    restart: unless-stopped
+    command: bash -c 'yarn start'
+    <<: *marketplace-backend
+
