@@ -79,10 +79,10 @@ For now, EVM Marketplace can only work with sponsored collections. You may set s
 Open the terminal and execute the following command. It will clone both backend and frontend of the marketplace.
 
 ```
-git clone git@github.com:UniqueNetwork/unique_evm_marketplace.git
+git clone https://github.com/UniqueNetwork/unique_evm_marketplace
 cd ./unique_evm_marketplace
-git clone git@github.com:UniqueNetwork/unique-marketplace-api.git
-git clone git@github.com:UniqueNetwork/unique-marketplace.git
+git clone https://github.com/UniqueNetwork/unique-marketplace-api
+git clone https://github.com/UniqueNetwork/unique-marketplace
 cd unique-marketplace-api
 git checkout release/v1.0
 cd ../unique-marketplace
