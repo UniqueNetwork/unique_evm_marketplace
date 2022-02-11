@@ -140,7 +140,7 @@ Copy the `Substrate mirror of ethereum mirror` address and send there some OPL. 
 
 Continue configuring the marketplace in `docker-compose.yml`
 
-1. Set the collections IDs created in step 4 to `UNIQUE_COLLECTION_IDS`
+1. Set the collections IDs created in step 6 to `UNIQUE_COLLECTION_IDS`
 2. Change `ESCROW_ADDRESS` to the Admin address created in step 2
 
 ## Step 8 - Build and Run
