@@ -100,7 +100,7 @@ We also provide a special utility that is the easiest way to deploy your smart c
 2. Change `ESCROW_SEED` to the 12-word admin mnemonic seed phrase that you have saved when you created the admin address in Polkadot{.js} extension.
 3. Run following script.
 ```
-docker-compose up -d --build
+docker-compose up -d --build marketplace-api
 docker exec marketplace-api node dist/cli.js playground migrate_db
 docker exec marketplace-api node dist/cli.js playground deploy_contract
 ```
