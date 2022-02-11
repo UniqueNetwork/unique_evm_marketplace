@@ -116,14 +116,14 @@ For now, EVM Marketplace can only work with sponsored collections. You may set s
 
 ### 3. Transfer OPL to Sponsor
 
-In order to sponsor EVM calls, you will need to transfer some OPL to ethereum mirror of your collection sponsor.
+To sponsor EVM calls, you will need to transfer some OPL to the ethereum mirror of your collection sponsor.
 
-Use built-in utility to get this address. For script below, change `<COLLECTION_SPONSOR>` set admin address and run it.
+Use a built-in utility to get this address. For the script below, change `<COLLECTION_SPONSOR>` set `admin address`, and run it.
 ```
 docker exec -ti marketplace-api node sub_to_eth.js <COLLECTION_SPONSOR>
 ```
 
-The result will look like this::
+The result will look like this:
 
 ```
 Substrate address: 5EC3pKTxGj8ciFp37giawUY1B4aWTAU7aRRK8eA1J8SKNRsf
@@ -134,7 +134,7 @@ Substrate mirror of ethereum mirror: 5C9rxShqs4vA3dxvesNUfPHRinWfwSeQAkHmaWbVzki
 Substrate mirror of ethereum mirror balance: 0
 ```
 
-Copy the `Substrate mirror of ethereum mirror` address and send there some OPL. Now all ethereum transactions will be sponsored from this address.
+Copy the `Substrate mirror of ethereum mirror` address and send some OPL there. Now all ethereum transactions will be sponsored from this address.
 
 ## Step 7 - Configure Marketplace
 
