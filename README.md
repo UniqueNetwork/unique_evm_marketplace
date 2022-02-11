@@ -123,7 +123,7 @@ Use built-in utility to get this address. For script below, change `<COLLECTION_
 docker exec -ti marketplace-api node sub_to_eth.js <COLLECTION_SPONSOR>
 ```
 
-The output will be like follow:
+The result will look like this::
 
 ```
 Substrate address: 5EC3pKTxGj8ciFp37giawUY1B4aWTAU7aRRK8eA1J8SKNRsf
