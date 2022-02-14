@@ -44,7 +44,51 @@ Copy your account address from Polkadot{.js} extension and send it to the faucet
 
 <img src="./doc/step3-1.png" width="400">
 
-## Step 4 - Create Sponsored Collection
+## Step 4 - Clone Marketplace Code From GitHub
+
+Open the terminal and execute the following command. It will clone both backend and frontend of the marketplace.
+
+```
+git clone https://github.com/UniqueNetwork/unique_evm_marketplace
+cd ./unique_evm_marketplace
+git clone https://github.com/UniqueNetwork/unique-marketplace-api
+git clone https://github.com/UniqueNetwork/unique-marketplace
+cd unique-marketplace-api
+git checkout release/v1.0
+cd ../unique-marketplace
+git checkout feature/easy-start-dev-server-env-configuration
+cd ..
+```
+
+## Step 5 - Deploy Marketplace Smart Contract
+
+The `unique-marketplace-api` project already contains the code of the smart contract, if you wish, you can explore it here – https://github.com/UniqueNetwork/unique-marketplace-api/tree/release/v1.0/blockchain
+
+We also provide a special utility that is the easiest way to deploy your smart contract. 
+
+1. From inside the `root directory` create `docker-compose.yml` and copy the content of the `docker-compose.example.yml` there.
+2. Change `ESCROW_SEED` to the 12-word admin mnemonic seed phrase that you have saved when you created the admin address in Polkadot{.js} extension.
+3. Run following script.
+```
+docker-compose up -d --build marketplace-api
+docker exec marketplace-api node dist/cli.js playground migrate_db
+docker exec marketplace-api node dist/cli.js playground deploy_contract
+```
+
+In a few minutes you will see in the terminal something like that:
+
+```
+...
+
+SUMMARY:
+
+CONTRACT_ETH_OWNER_SEED: '0x6d853337ab45b20aa5231c33979330e2806465fb4ab...'
+CONTRACT_ADDRESS: '0x74C2d83b868f7E7B7C02B7D0b87C3532a06f392c'
+```
+
+Set the values above to the corresponding variables of `docker-compose.yml`.
+
+## Step 6 - Create Sponsored Collection
 
 You may create collection for your marketplace using [Minter](https://minter-opal.unique.network/#/builder/collections). When you create your collection you may find `collection id`
 
@@ -72,57 +116,31 @@ For now, EVM Marketplace can only work with sponsored collections. You may set s
 
 ### 3. Transfer OPL to Sponsor
 
-`TODO evmToAddress(adressToEvm)`
+To sponsor EVM calls, you will need to transfer some OPL to the ethereum mirror of your collection sponsor.
 
-## Step 5 - Clone Marketplace Code From GitHub
-
-Open the terminal and execute the following command. It will clone both backend and frontend of the marketplace.
-
+Use a built-in utility to get this address. For the script below, change `<COLLECTION_SPONSOR>` set `admin address`, and run it.
 ```
-git clone https://github.com/UniqueNetwork/unique_evm_marketplace
-cd ./unique_evm_marketplace
-git clone https://github.com/UniqueNetwork/unique-marketplace-api
-git clone https://github.com/UniqueNetwork/unique-marketplace
-cd unique-marketplace-api
-git checkout release/v1.0
-cd ../unique-marketplace
-git checkout feature/easy-start-dev-server-env-configuration
-cd ..
+docker exec -ti marketplace-api node sub_to_eth.js <COLLECTION_SPONSOR>
 ```
 
-## Step 6 - Deploy Marketplace Smart Contract
-
-The `unique-marketplace-api` project already contains the code of the smart contract, if you wish, you can explore it here – https://github.com/UniqueNetwork/unique-marketplace-api/tree/release/v1.0/blockchain
-
-We also provide a special utility that is the easiest way to deploy your smart contract. 
-
-1. From inside the `root directory` create `docker-compose.yml` and copy the content of the `docker-compose.example.yml` there.
-2. Change `ESCROW_SEED` to the 12-word admin mnemonic seed phrase that you have saved when you created the admin address in Polkadot{.js} extension.
-3. Run following script.
-```
-docker-compose up -d --build
-docker exec marketplace-api node dist/cli.js playground migrate_db
-docker exec marketplace-api node dist/cli.js playground deploy_contract
-```
-
-In a few minutes you will see in the terminal something like that:
+The result will look like this:
 
 ```
-...
-
-SUMMARY:
-
-CONTRACT_ETH_OWNER_SEED: '0x6d853337ab45b20aa5231c33979330e2806465fb4ab...'
-CONTRACT_ADDRESS: '0x74C2d83b868f7E7B7C02B7D0b87C3532a06f392c'
+Substrate address: 5EC3pKTxGj8ciFp37giawUY1B4aWTAU7aRRK8eA1J8SKNRsf
+Substrate address balance: 9748981663000000000000
+Ethereum mirror: 0x5e125Fd6aA7D06dEEd31475BcE293999a48015B0
+Ethereum mirror balance: 0
+Substrate mirror of ethereum mirror: 5C9rxShqs4vA3dxvesNUfPHRinWfwSeQAkHmaWbVzki84g1y
+Substrate mirror of ethereum mirror balance: 0
 ```
 
-Set the values above to the corresponding variables of `docker-compose.yml`.
+Copy the `Substrate mirror of ethereum mirror` address and send some OPL there. Now all ethereum transactions will be sponsored from this address.
 
 ## Step 7 - Configure Marketplace
 
 Continue configuring the marketplace in `docker-compose.yml`
 
-1. Set the collections IDs created in step 4 to `UNIQUE_COLLECTION_IDS`
+1. Set the collections IDs created in step 6 to `UNIQUE_COLLECTION_IDS`
 2. Change `ESCROW_ADDRESS` to the Admin address created in step 2
 
 ## Step 8 - Build and Run
