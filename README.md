@@ -36,13 +36,9 @@ You should write down the 12-word mnemonic seed on the paper. Do not share it wi
 
 Follow the Polkadot{.js} instructions to complete the account setup.
 
-## Step 3 - Get OPL
+## Step 3 - Get QTZ
 
-In order to get the marketplace running, you’ll need some OPL coins. You can get it for free from the faucet bot on Telegram: [@unique2faucet_opal_bot](https://t.me/unique2faucet_opal_bot)
-
-Copy your account address from Polkadot{.js} extension and send it to the faucet bot:
-
-<img src="./doc/step3-1.png" width="400">
+In order to get the marketplace running, you’ll need some QTZ tokens. Now you can buy then on [MEXC Global]("https://www.mexc.com/exchange/QTZ_USDT").
 
 ## Step 4 - Clone Marketplace Code From GitHub
 
@@ -91,11 +87,11 @@ Set the values above to the corresponding variables of `docker-compose.yml`.
 
 ## Step 6 - Create Sponsored Collection
 
-You may create collection for your marketplace using [Minter](https://minter-opal.unique.network/#/builder/collections). When you create your collection you may find `collection id`
+You may create collection for your marketplace using [Minter](https://minter-quartz.unique.network). When you create your collection you may find `collection id`
 
 ![Minter](./doc/Step6-0.png)
 
-For now, EVM Marketplace can only work with sponsored collections. You may set sponsorship using [polkadot.js.org/apps](https://polkadot.js.org/apps/?rpc=wss://opal.unique.network/#/extrinsics) in 3 steps:
+For now, EVM Marketplace can only work with sponsored collections. You may set sponsorship using [polkadot.js.org/apps](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fquartz.unique.network#/extrinsics) in 3 steps:
 
 ### 1. Set Collection Sponsor
 
@@ -115,9 +111,9 @@ For now, EVM Marketplace can only work with sponsored collections. You may set s
 
 ![confirmSponsorship](./doc/step6-2.png)
 
-### 3. Transfer OPL to Sponsor
+### 3. Transfer QTZ to Sponsor
 
-To sponsor EVM calls, you will need to transfer some OPL to the ethereum mirror of your collection sponsor.
+To sponsor EVM calls, you will need to transfer some QTZ to the ethereum mirror of your collection sponsor.
 
 Use a built-in utility to get this address. For the script below, change `<COLLECTION_SPONSOR>` set `admin address`, and run it.
 ```
@@ -135,7 +131,7 @@ Substrate mirror of ethereum mirror: 5C9rxShqs4vA3dxvesNUfPHRinWfwSeQAkHmaWbVzki
 Substrate mirror of ethereum mirror balance: 0
 ```
 
-Copy the `Substrate mirror of ethereum mirror` address and send some OPL there. Now all ethereum transactions will be sponsored from this address.
+Copy the `Substrate mirror of ethereum mirror` address and send some QTZ there. Now all ethereum transactions will be sponsored from this address.
 
 ## Step 7 - Configure Marketplace
 
