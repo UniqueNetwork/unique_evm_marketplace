@@ -51,6 +51,7 @@ Open the terminal and execute the following command. It will clone both backend 
 ```
 git clone https://github.com/UniqueNetwork/unique_evm_marketplace
 cd ./unique_evm_marketplace
+git checkout qtz_network
 git clone https://github.com/UniqueNetwork/unique-marketplace-api
 git clone https://github.com/UniqueNetwork/unique-marketplace
 cd unique-marketplace-api
