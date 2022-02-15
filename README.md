@@ -5,7 +5,7 @@ Who is this document for:
 - Full stack engineers
 - IT administrators
 
-In this tutorial we will install the marketplace locally on a computer or in a virtual machine with Ubuntu OS. The process of installing it in a production environment is the same plus your IT administrator will need to setup the infrastructure (such as domain name, hosting, firewall, nginx, and SSL certificates) so that the server that hosts the marketplace can be accessed by the users on the Internet, like Unique marketplace: [https://unqnft.io](https://unqnft.io).
+In this tutorial we will install the marketplace locally on a computer or in a virtual machine with Ubuntu OS. The process of installing it in a production environment is identical but will require additional steps needed to set up the supporting infrastructure that allows for on-line access on the interweb (a domain name, hosting, firewall, nginx, and the corresponding SSL certificates). See Unique marketplace as am example in this regard: [https://unqnft.io](https://unqnft.io).
 
 
 ## Prerequisites
@@ -22,7 +22,7 @@ Visit [https://polkadot.js.org/extension/](https://polkadot.js.org/extension/) a
 
 ![Install Polkadot{.js} Extension](./doc/step1-1.png)
 
-As a result you should see that little icon in the top right corner:
+Upon completing the installation successfully you should see the appropriate browser extension icon in the top right corner:
 
 ![Install Polkadot{.js} Extension](./doc/step1-2.png)
 
@@ -32,7 +32,7 @@ Click on the Polkadot{.js} extension icon and select “create new account” in
 
 <img src="./doc/step2-1.png" width="400">
 
-You should write down the 12-word mnemonic seed on the paper. Do not share it with anybody because this 12-word phrase is all that’s needed to get access to the money and NFTs that are stored on this account.
+Take care to write down the 12-word mnemonic seed on a piece of paper. Do not share it with anybody as this 12-word phrase is all that’s needed to obtain access to the assets stored in this account.
 
 Follow the Polkadot{.js} instructions to complete the account setup.
 
@@ -42,7 +42,7 @@ In order to get the marketplace running, you’ll need some QTZ tokens. Now you 
 
 ## Step 4 - Clone Marketplace Code From GitHub
 
-Open the terminal and execute the following command. It will clone both backend and frontend of the marketplace.
+Open the terminal and execute the following commands. This will clone both the backend and the frontend of the marketplace.
 
 ```
 git clone https://github.com/UniqueNetwork/unique_evm_marketplace -b qtz_network
@@ -66,7 +66,7 @@ docker exec marketplace-api node dist/cli.js playground migrate_db
 docker exec marketplace-api node dist/cli.js playground deploy_contract
 ```
 
-In a few minutes you will see in the terminal something like that:
+After a short interval you should get an operational summary output in the terminal:
 
 ```
 ...
@@ -99,7 +99,7 @@ For now, EVM Marketplace can only work with sponsored collections. You may set s
 ### 2. Confirm Sponsorship
 
 - Choose `unique` - `confirmSponsorship`
-- Set the admin address created in step 2 as the transation sender
+- Set the admin address created in step 2 as the transaction sender
 - Set the collectionId parameter to the id of the previously created collection
 - Click `Submit Transaction` and follow the instructions
 
@@ -136,7 +136,7 @@ Continue configuring the marketplace in `docker-compose.yml`
 
 ## Step 8 - Build and Run
 
-Execute the following command in the terminal and wait for it to finish:
+Execute the following command in the terminal and wait for it to complete:
 
 ```
 docker-compose up -d --build
@@ -148,6 +148,6 @@ Open [localhost:3000](http://localhost:3000) in your Chrome browser. On the firs
 
 ![Approve](./doc/step9-1.png)
 
-The marketplace will connect to the blockchain and the local backend and will display the empty Market page. It is now ready to play.
+The marketplace will connect to the blockchain and the local backend and will display the empty Market page. It is now ready to rumble.
 
 ![Enjoy](./doc/step9-2.png)
