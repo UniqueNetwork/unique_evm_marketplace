@@ -45,16 +45,10 @@ In order to get the marketplace running, you’ll need some QTZ tokens. Now you 
 Open the terminal and execute the following command. It will clone both backend and frontend of the marketplace.
 
 ```
-git clone https://github.com/UniqueNetwork/unique_evm_marketplace
+git clone https://github.com/UniqueNetwork/unique_evm_marketplace -b qtz_network
 cd ./unique_evm_marketplace
-git checkout qtz_network
-git clone https://github.com/UniqueNetwork/unique-marketplace-api
-git clone https://github.com/UniqueNetwork/unique-marketplace
-cd unique-marketplace-api
-git checkout release/v1.0
-cd ../unique-marketplace
-git checkout feature/easy-start-dev-server-env-configuration
-cd ..
+git clone https://github.com/UniqueNetwork/unique-marketplace-api -b release/v1.0
+git clone https://github.com/UniqueNetwork/unique-marketplace -b feature/easy-start-dev-server-env-configuration
 ```
 
 ## Step 5 - Deploy Marketplace Smart Contract
@@ -115,7 +109,7 @@ For now, EVM Marketplace can only work with sponsored collections. You may set s
 
 To sponsor EVM calls, you will need to transfer some QTZ to the ethereum mirror of your collection sponsor.
 
-Use a built-in utility to get this address. For the script below, change `<COLLECTION_SPONSOR>` set `admin address`, and run it.
+Use a built-in utility to get this address. For the script below, change `<COLLECTION_SPONSOR>` to the admin address from the Step 2, and run it.
 ```
 docker exec -ti marketplace-api node sub_to_eth.js <COLLECTION_SPONSOR>
 ```
