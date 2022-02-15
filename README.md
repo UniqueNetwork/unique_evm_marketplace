@@ -38,7 +38,7 @@ Follow the Polkadot{.js} instructions to complete the account setup.
 
 ## Step 3 - Get QTZ
 
-In order to get the marketplace running, you’ll need some QTZ tokens. Now you can buy then on [MEXC Global]("https://www.mexc.com/exchange/QTZ_USDT").
+In order to get the marketplace running, you’ll need some QTZ tokens. Now you can buy then on [MEXC Global](https://www.mexc.com/exchange/QTZ_USDT).
 
 ## Step 4 - Clone Marketplace Code From GitHub
 
