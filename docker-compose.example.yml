@@ -28,7 +28,7 @@ x-marketplace: &marketplace-backend
     SENTRY_DSN: 'https://hash@domain.tld/sentryId'
     UNIQUE_WS_ENDPOINT: 'wss://us-ws-quartz.unique.network'
     # UNIQUE_WS_ENDPOINT: 'wss://quartz.unique.network'
-    # UNIQUE_WS_ENDPOINT: 'wss://eu-ws-quartz.unique.network' <--- if main gate is not working
+    # UNIQUE_WS_ENDPOINT: 'wss://eu-ws-quartz.unique.network' # <--- if main gate is not working
 
   depends_on:
     - marketplace-postgres
