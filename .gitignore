@@ -4,5 +4,6 @@
 # Front and back
 /unique-marketplace
 /unique-marketplace-api
+/postgresql
 
 docker-compose.yml
