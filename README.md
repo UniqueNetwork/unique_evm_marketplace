@@ -1,3 +1,7 @@
+> :warning: **This project is no longer supported!**
+> 
+> To launch the marketplace, use [marketplace-docker](https://github.com/UniqueNetwork/marketplace-docker) instead
+
 # Unique EVM Marketplace Deployment
 
 Who is this document for:
